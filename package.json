@@ -1,0 +1,25 @@
+{
+  "name": "school-library-management",
+  "version": "1.0.0",
+  "description": "A school library management system built with TypeScript",
+  "main": "index.html",
+  "scripts": {
+    "start": "lite-server",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "dev": "concurrently \"npm run watch\" \"npm run start\""
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "management",
+    "school"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "lite-server": "^2.6.1",
+    "typescript": "^5.1.6"
+  }
+}
