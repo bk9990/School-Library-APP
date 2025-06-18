@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Library Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>School Library Management System</h1>
+    </header>
+    
+    <nav>
+      <ul class="tabs">
+        <li id="books-tab" class="tab active">Books</li>
+        <li id="students-tab" class="tab">Students</li>
+        <li id="borrowings-tab" class="tab">Borrowings</li>
+        <li id="reports-tab" class="tab">Reports</li>
+      </ul>
+    </nav>
+    
+    <main>
+      <!-- Books Section -->
+      <section id="books-section" class="section">
+        <div class="section-header">
+          <h2>Books Management</h2>
+          <div class="section-actions">
+            <button id="new-book-btn" class="btn btn-primary">New Book</button>
+            <button id="refresh-books-btn" class="btn btn-secondary">Refresh</button>
+            <div class="search-container">
+              <input type="text" id="book-search" placeholder="Search books...">
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-content">
+          <div class="form-container">
+            <h3>Add/Edit Book</h3>
+            <form id="book-form">
+              <input type="hidden" name="id" value="">
+              
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" required>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="isbn">ISBN</label>
+                  <input type="text" id="isbn" name="isbn" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="publish-year">Publish Year</label>
+                  <input type="number" id="publish-year" name="publish-year" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="book-category">Category</label>
+                  <select id="book-category" name="category" required></select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="shelf-location">Shelf Location</label>
+                  <input type="text" id="shelf-location" name="shelf-location" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="cover-image-url">Cover Image URL (optional)</label>
+                <input type="url" id="cover-image-url" name="cover-image-url">
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Book</button>
+              </div>
+            </form>
+          </div>
+          
+          <div class="list-container">
+            <h3>Books List</h3>
+            <div id="books-list" class="cards-grid"></div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Students Section -->
+      <section id="students-section" class="section" style="display: none;">
+        <div class="section-header">
+          <h2>Students Management</h2>
+          <div class="section-actions">
+            <button id="new-student-btn" class="btn btn-primary">New Student</button>
+            <button id="refresh-students-btn" class="btn btn-secondary">Refresh</button>
+            <div class="search-container">
+              <input type="text" id="student-search" placeholder="Search students...">
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-content">
+          <div class="form-container">
+            <h3>Add/Edit Student</h3>
+            <form id="student-form">
+              <input type="hidden" name="id" value="">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="first-name">First Name</label>
+                  <input type="text" id="first-name" name="first-name" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" id="last-name" name="last-name" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="student-grade">Grade</label>
+                  <select id="student-grade" name="grade" required></select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Student</button>
+              </div>
+            </form>
+          </div>
+          
+          <div class="list-container">
+            <h3>Students List</h3>
+            <div id="students-list" class="cards-grid"></div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Borrowings Section -->
+      <section id="borrowings-section" class="section" style="display: none;">
+        <div class="section-header">
+          <h2>Borrowings Management</h2>
+          <div class="section-actions">
+            <button id="refresh-borrowings-btn" class="btn btn-secondary">Refresh</button>
+            <div class="search-container">
+              <input type="text" id="borrowing-search" placeholder="Search borrowings...">
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-content">
+          <div class="forms-container">
+            <div class="form-wrapper">
+              <h3>Borrow a Book</h3>
+              <form id="borrow-form">
+                <div class="form-group">
+                  <label for="borrow-book">Book</label>
+                  <select id="borrow-book" name="book" required></select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="borrow-student">Student</label>
+                  <select id="borrow-student" name="student" required></select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="borrow-days">Days to Return</label>
+                  <input type="number" id="borrow-days" name="days" value="14" min="1" max="60" required>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Borrow Book</button>
+                </div>
+              </form>
+            </div>
+            
+            <div class="form-wrapper">
+              <h3>Return a Book</h3>
+              <form id="return-form">
+                <div class="form-group">
+                  <label for="return-book">Select Borrowing</label>
+                  <select id="return-book" name="borrowing" required></select>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-success">Return Book</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <div class="list-container">
+            <h3>Active Borrowings</h3>
+            <div id="borrowings-list" class="cards-grid"></div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Reports Section -->
+      <section id="reports-section" class="section" style="display: none;">
+        <div class="section-header">
+          <h2>Library Reports</h2>
+          <div class="section-actions">
+            <button id="refresh-reports-btn" class="btn btn-secondary">Refresh</button>
+          </div>
+        </div>
+        
+        <div class="section-content">
+          <div class="report-container">
+            <h3>Library Statistics</h3>
+            <div id="statistics" class="statistics-container"></div>
+          </div>
+          
+          <div class="report-container">
+            <h3>Overdue Books</h3>
+            <div id="overdue-list" class="overdue-container"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <p>&copy; 2025 School Library Management System</p>
+    </footer>
+  </div>
+  
+  <script src="dist/app.js" type="module"></script>
+</body>
+</html>
